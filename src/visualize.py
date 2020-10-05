@@ -69,7 +69,6 @@ def chord_chard(data):
     bokeh_server = pn.Row(plot).show(port=1234)
 
 def draw_cloud(dataframe, column):
-
     
     # Join the different processed titles together.
     long_string = ','.join(list(dataframe[column]))
