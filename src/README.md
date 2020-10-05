@@ -20,7 +20,7 @@ A set of function to vectorise and embed text.
 * Contextual: word2vec, doc2vec, glove, fasttext, etc
 * Transformer based (transfer-learning): pre-trained transformer models to embed text and fine-tuning scripts
 
-# Model Training and Evaluation:
+## Model Training and Evaluation:
 Scripts that define model architectures and parameters
 
 * Probabilistic Modelling : Sklearn - Logist Regression, XGBoost, SVM, etc
