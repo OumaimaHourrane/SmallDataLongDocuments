@@ -169,29 +169,32 @@ def clean(dataframe, column_name, basic_cleaning = True,
     """
     
     # let s be the string to be cleaned
-    s = dataframe.column_name
+    texts = column_name.to_list()
+    clean_texts = []
+    for s in texts:
+        if not s:
+            return None
+
+        if basic_cleaning:
+            s = preprocess_text(s)
+
+        if tokenizing:
+            w_list = word_tokenize(s)
+            dataframe["words list"] = w_list
+
+        if stemming:
+            w_list = word_tokenize(s)
+            w_list = f_stem(w_list)
+            s = ' '.join(w_list)
+
+        if stopwords:
+            w_list = word_tokenize(s)
+            w_list = f_stopw(w_list)
+            s = ' '.join(w_list)
+            
+        clean_texts.append(s)     
     
-    if not s:
-        return None
-    
-    if basic_cleaning:
-        s = preprocess_text(s)
-        
-    if tokenizing:
-        w_list = word_tokenize(s)
-        dataframe["words list"] = w_list
-        
-    if stemming:
-        w_list = word_tokenize(s)
-        w_list = f_stem(w_list)
-        s = ' '.join(w_list)
-        
-    if stopwords:
-        w_list = word_tokenize(s)
-        w_list = f_stopw(w_list)
-        s = ' '.join(w_list)
-    
-    dataframe["cleaned_" + column_name] = s
+    dataframe['new_cleaned_column'] = clean_texts
       
     
 def segment(dataframe, column_name):
@@ -203,9 +206,13 @@ def segment(dataframe, column_name):
         - paragraph splitting (at \n etc)
     
     '''
-    sentences = []
-    segments = spacy.load("en_core_web_sm") 
-    doc = segments(datafrane.column_name) 
-    for sent in doc.sents: 
-        sentences.append(str(sent))
-    return sentences
+    segments = spacy.load("en_core_web_sm")
+    list_sentences = []
+    texts = column_name.to_list()
+    for s in texts:  
+        sentences = []
+        doc = segments(s) 
+        for sent in doc.sents: 
+            sentences.append(str(sent))
+        list_sentences.append(sentences)
+    dataframe['list_sentences'] = list_sentences  
