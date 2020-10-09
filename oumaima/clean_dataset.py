@@ -203,3 +203,9 @@ def segment(dataframe, column_name):
         - paragraph splitting (at \n etc)
     
     '''
+    sentences = []
+    segments = spacy.load("en_core_web_sm") 
+    doc = segments(datafrane.column_name) 
+    for sent in doc.sents: 
+        sentences.append(str(sent))
+    return sentences
