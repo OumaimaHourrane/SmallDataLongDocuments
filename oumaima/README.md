@@ -1,2 +1,3 @@
 # Small Data Long Documents
-Joint work space for scripts, functions and notebooks.
+## Updates
+06/10/2020: Data cleaning and sentences segmentation (first draft- waiting for check).
