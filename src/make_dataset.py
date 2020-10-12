@@ -102,11 +102,17 @@ def create_training_texts(dataframem, compare_with_API = bool):
         print('only taxonomy data is considered')
     
 
-def labeling_encoding(dataframe, label_powerset = bool):
-    
+def labeling_encoding(dataframe, categories, label_powerset = bool):
     '''
     Function that encodes the label and gives option for different classification architectures (for example label_powerset)
     '''
+    # generate binary values using get_dummies
+    # categories is a list of categories from the main dataframe to be converted into on-hot encoding labels
+    df = pd.DataFrame(dataframe, columns=categories)
+    dum_df = pd.get_dummies(df, columns=categories)
+    # merge with main df on key values
+    df = df.join(dum_df)
+    return df
     
 #%%
 
